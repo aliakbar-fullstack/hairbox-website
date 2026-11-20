@@ -1,74 +1,54 @@
-import { Check, MapPin } from 'lucide-react';
+import { Scissors } from 'lucide-react';
 import Reveal from '@/components/Reveal';
 import { STUDIO } from '@/lib/studio';
 
-const ABOUT_IMAGE =
-  'https://images.pexels.com/photos/7750108/pexels-photo-7750108.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1400&fit=crop';
-
-const HIGHLIGHTS = [
-  'Bridal, party and everyday makeovers',
-  'Precision hair cutting, colour and treatments',
-  'Customised skin care and luxury nail rituals',
-  'A calm, private studio experience',
-];
-
 export default function About() {
   return (
-    <section id="about" className="scroll-mt-20 bg-accent-50 py-24 sm:py-32">
-      <div className="mx-auto grid max-w-7xl items-center gap-16 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20">
-        <Reveal>
+    <section id="about" className="scroll-mt-20 bg-secondary-900 py-24 sm:py-32">
+      <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:gap-16">
+        <Reveal className="lg:col-span-6">
           <div className="relative">
-            <div className="absolute -inset-4 -z-10 rounded-[2.5rem] border border-primary-300/70" aria-hidden="true" />
-            <div className="overflow-hidden rounded-[2rem] shadow-lift">
+            <div
+              className="absolute -inset-4 -z-10 rounded-[2.5rem] border border-secondary-600"
+              aria-hidden="true"
+            />
+            <div className="overflow-hidden rounded-[2rem] border border-secondary-600 bg-secondary-800 shadow-lift">
               <img
-                src={ABOUT_IMAGE}
-                alt="Modern DEZERT studio interior with styling chairs and warm lighting"
+                src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1200&q=80"
+                alt="Inside Hair Box – The Men's Salon grooming station"
+                className="aspect-[4/5] w-full object-cover"
                 loading="lazy"
-                className="aspect-[4/5] w-full object-cover transition-transform duration-[1.2s] ease-out hover:scale-105"
               />
             </div>
-            <div className="absolute -bottom-6 right-6 flex items-center gap-4 rounded-2xl border border-primary-300/60 bg-white px-5 py-4 shadow-lift sm:right-10">
-              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary-400 text-secondary-900">
-                <MapPin className="h-5 w-5" aria-hidden="true" />
+            <div className="mt-5 flex items-center gap-4 rounded-2xl border border-secondary-600 bg-secondary-800/95 p-4 shadow-soft sm:absolute sm:-bottom-6 sm:right-6 sm:mt-0 sm:max-w-xs">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary-500 text-accent-300 ring-1 ring-accent-300/30">
+                <Scissors className="h-5 w-5" aria-hidden="true" />
               </span>
               <div>
-                <p className="font-serif text-lg font-semibold leading-tight text-secondary-900">Tirur, Kerala</p>
-                <p className="font-sans text-xs text-secondary-600">Edappal–Tirur Road</p>
+                <p className="font-serif text-base font-semibold text-secondary-50">Tirur &amp; Kottakkal</p>
+                <p className="font-sans text-xs text-secondary-200/75">
+                  Precision cuts, beard care &amp; groom styling
+                </p>
               </div>
             </div>
           </div>
         </Reveal>
 
-        <Reveal delay={150}>
+        <Reveal delay={150} className="lg:col-span-6">
           <div>
-            <span className="section-eyebrow">About DEZERT</span>
-            <h2 className="mt-4 font-serif text-4xl font-medium sm:text-5xl">
-              Beauty, Elegance <span className="italic text-primary-700">&amp;</span> Confidence
+            <span className="section-eyebrow">About {STUDIO.name}</span>
+            <h2 className="mt-4 font-serif text-4xl font-semibold leading-tight text-secondary-50 sm:text-5xl">
+              Crafted Grooming for the Modern Man
             </h2>
-            <div className="gold-divider mt-8 !mx-0 !w-24" aria-hidden="true" />
-            <p className="mt-8 font-sans text-base leading-[1.5] text-secondary-700 sm:text-lg">
-              DEZERT Makeover Studio is a premium beauty destination in Tirur, bringing together expert hair, skin,
-              makeup and nail care under one refined roof. Every appointment begins with a conversation, so the look
-              you leave with feels entirely like you, only more polished.
+            <div className="gold-divider mt-6" aria-hidden="true" />
+            <p className="mt-7 font-sans text-base leading-[1.7] text-secondary-200/85 sm:text-lg">
+              {STUDIO.name} brings sharp fades, clean beard work, relaxing scalp and skin care, and sharp groom styling
+              together under one roof in Tirur and Kottakkal. Every visit focuses on clean hygiene, unhurried care, and a
+              look tailored to your features.
             </p>
-            <p className="mt-5 font-sans text-base leading-[1.5] text-secondary-700 sm:text-lg">
-              From intimate bridal preparations to a quick grooming refresh, our team brings careful technique, quality
-              products and unhurried attention to every detail.
-            </p>
-
-            <ul className="mt-8 space-y-4">
-              {HIGHLIGHTS.map((item) => (
-                <li key={item} className="flex items-start gap-3 font-sans text-base text-secondary-800">
-                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary-100 text-primary-700">
-                    <Check className="h-3.5 w-3.5" aria-hidden="true" />
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            <p className="mt-10 font-sans text-sm text-secondary-600">
-              Studio open daily, <span className="font-semibold text-secondary-800">{STUDIO.hoursDisplay}</span>
+            <p className="mt-4 font-sans text-base leading-[1.7] text-secondary-200/75">
+              Whether you stop by Ring Road in Tirur or Thazhe Kottakkal for a quick weekly tidy-up or a full event
+              makeover, our barbers keep things consistent, sharp, and comfortable.
             </p>
           </div>
         </Reveal>

@@ -12,7 +12,7 @@ import Footer from '@/components/Footer';
 
 function App() {
   return (
-    <div className="min-h-screen bg-accent-50 text-secondary-800">
+    <div className="min-h-screen bg-secondary-900 text-secondary-50">
       <Navbar />
       <main>
         <Hero />

@@ -1,97 +1,110 @@
 import { useMemo, useState } from 'react';
-import { Maximize2 } from 'lucide-react';
+import { Eye } from 'lucide-react';
 import Lightbox from '@/components/Lightbox';
 import Reveal from '@/components/Reveal';
-import { GALLERY_CATEGORIES, GALLERY_ITEMS, type GalleryCategory } from '@/data/gallery';
+import {
+  GALLERY_CATEGORIES,
+  GALLERY_ITEMS,
+  type GalleryCategory,
+  type GalleryItem,
+} from '@/data/gallery';
 
-type Filter = 'All' | GalleryCategory;
+type FilterCategory = 'All' | GalleryCategory;
 
-const FILTERS: Filter[] = ['All', ...GALLERY_CATEGORIES];
+const FILTER_TABS: FilterCategory[] = ['All', ...GALLERY_CATEGORIES];
 
 export default function Gallery() {
-  const [filter, setFilter] = useState<Filter>('All');
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<FilterCategory>('All');
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  const items = useMemo(
-    () => (filter === 'All' ? GALLERY_ITEMS : GALLERY_ITEMS.filter((item) => item.category === filter)),
-    [filter],
-  );
+  const visibleItems = useMemo<GalleryItem[]>(() => {
+    if (selectedCategory === 'All') return GALLERY_ITEMS;
+    return GALLERY_ITEMS.filter((item) => item.category === selectedCategory);
+  }, [selectedCategory]);
 
   return (
-    <section id="gallery" className="scroll-mt-20 bg-white py-24 sm:py-32">
+    <section id="gallery" className="scroll-mt-20 bg-secondary-900 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
           <div className="mx-auto max-w-2xl text-center">
-            <span className="section-eyebrow">Gallery</span>
-            <h2 className="mt-4 font-serif text-4xl font-medium sm:text-5xl">Looks we are proud of</h2>
+            <span className="section-eyebrow">The Lookbook</span>
+            <h2 className="mt-4 font-serif text-4xl font-semibold text-secondary-50 sm:text-5xl">
+              Fresh Cuts &amp; Clean Finishes
+            </h2>
             <div className="gold-divider mx-auto mt-6" aria-hidden="true" />
+            <p className="mt-5 font-sans text-base text-secondary-200/80">
+              Browse recent haircuts, beard sculpting, and groom styles crafted at Hair Box – The Men&apos;s Salon.
+            </p>
           </div>
         </Reveal>
 
-        <div role="tablist" aria-label="Filter gallery" className="mt-12 flex flex-wrap justify-center gap-2 sm:gap-3">
-          {FILTERS.map((option) => {
-            const active = filter === option;
+        <div className="mt-10 flex flex-wrap justify-center gap-2.5" role="tablist" aria-label="Filter gallery by category">
+          {FILTER_TABS.map((category) => {
+            const active = selectedCategory === category;
             return (
               <button
-                key={option}
+                key={category}
                 type="button"
                 role="tab"
                 aria-selected={active}
-                onClick={() => setFilter(option)}
-                className={`rounded-full border px-4 py-2 font-sans text-sm font-medium transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 sm:px-5 ${
+                onClick={() => {
+                  setSelectedCategory(category);
+                  setActiveIndex(null);
+                }}
+                className={`rounded-full border px-4 py-2 font-sans text-xs font-semibold uppercase tracking-[0.16em] transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-300 ${
                   active
-                    ? 'border-primary-400 bg-primary-400 text-secondary-900 shadow-gold'
-                    : 'border-primary-300 bg-white text-secondary-800 hover:border-primary-400 hover:bg-primary-50'
+                    ? 'border-accent-300 bg-accent-300 text-secondary-900 shadow-gold'
+                    : 'border-secondary-600 bg-secondary-800/80 text-secondary-200 hover:border-accent-300/60 hover:text-accent-300'
                 }`}
               >
-                {option}
+                {category}
               </button>
             );
           })}
         </div>
 
-        <div className="mt-12 columns-1 gap-5 sm:columns-2 lg:columns-3">
-          {items.map((item, index) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => setLightboxIndex(index)}
-              aria-label={`View ${item.alt}`}
-              className="group relative mb-5 block w-full break-inside-avoid overflow-hidden rounded-3xl bg-accent-100 text-left shadow-soft ring-1 ring-primary-200/70 animate-fade-up focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
-              style={{ animationDelay: `${index * 40}ms` }}
-            >
-              <img
-                src={item.src}
-                alt={item.alt}
-                loading="lazy"
-                className={`w-full object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-105 ${
-                  item.tall ? 'aspect-[3/4]' : 'aspect-[4/3]'
-                }`}
-              />
-              <span className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-secondary-900/80 via-secondary-900/20 to-transparent p-5 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100">
-                <span className="flex items-end justify-between gap-3">
-                  <span>
-                    <span className="block font-sans text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-primary-200">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {visibleItems.map((item, idx) => (
+            <Reveal key={item.id} delay={(idx % 3) * 80}>
+              <button
+                type="button"
+                onClick={() => setActiveIndex(idx)}
+                className="group relative block w-full overflow-hidden rounded-3xl border border-secondary-600 bg-secondary-800 text-left shadow-soft transition-all duration-500 hover:-translate-y-1 hover:border-accent-300/60 hover:shadow-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-300"
+              >
+                <div className={`${item.tall ? 'aspect-[3/4]' : 'aspect-[4/5]'} w-full overflow-hidden`}>
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-secondary-900 via-secondary-900/35 to-transparent opacity-85 transition-opacity duration-300 group-hover:opacity-95" />
+                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
+                  <div>
+                    <span className="font-sans text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-accent-300">
                       {item.category}
                     </span>
-                    <span className="mt-1 block font-serif text-xl font-semibold text-white">{item.alt}</span>
+                    <span className="mt-1 block font-serif text-lg font-semibold leading-snug text-secondary-50">
+                      {item.alt}
+                    </span>
+                  </div>
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-accent-300/40 bg-secondary-900/85 text-accent-300 transition-colors duration-300 group-hover:bg-accent-300 group-hover:text-secondary-900">
+                    <Eye className="h-4 w-4" aria-hidden="true" />
                   </span>
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/90 text-secondary-900">
-                    <Maximize2 className="h-4 w-4" aria-hidden="true" />
-                  </span>
-                </span>
-              </span>
-            </button>
+                </div>
+              </button>
+            </Reveal>
           ))}
         </div>
       </div>
 
-      {lightboxIndex !== null && (
+      {activeIndex !== null && visibleItems[activeIndex] && (
         <Lightbox
-          items={items}
-          index={lightboxIndex}
-          onIndexChange={setLightboxIndex}
-          onClose={() => setLightboxIndex(null)}
+          items={visibleItems}
+          index={activeIndex}
+          onIndexChange={setActiveIndex}
+          onClose={() => setActiveIndex(null)}
         />
       )}
     </section>

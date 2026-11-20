@@ -8,40 +8,40 @@
   }
 
   body {
-    @apply bg-accent-50 font-sans text-secondary-800 leading-[1.5] antialiased;
+    @apply bg-secondary-900 font-sans font-normal text-secondary-50 leading-[1.65] antialiased;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    @apply font-serif leading-[1.2] text-secondary-900;
+    @apply font-serif font-normal tracking-[-0.015em] leading-[1.08] text-secondary-50;
   }
 
   ::selection {
-    @apply bg-primary-200 text-secondary-900;
+    @apply bg-accent-300 text-secondary-900;
   }
 }
 
 @layer components {
   .section-eyebrow {
-    @apply inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-[0.28em] text-primary-700;
+    @apply inline-flex items-center gap-2 font-sans text-xs font-medium uppercase tracking-[0.22em] text-accent-300;
   }
 
   .gold-divider {
-    @apply h-px w-16 bg-gradient-to-r from-transparent via-primary-400 to-transparent;
+    @apply h-px w-16 bg-gradient-to-r from-transparent via-accent-300 to-transparent;
   }
 
   .btn-gold {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-primary-200 via-primary-400 to-primary-500 px-7 py-3.5 font-sans text-sm font-semibold tracking-wide text-secondary-900 shadow-gold transition duration-300 hover:-translate-y-0.5 hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-br from-accent-200 via-accent-300 to-primary-300 px-7 py-3.5 font-sans text-sm font-medium tracking-wide text-secondary-900 shadow-gold transition duration-300 hover:-translate-y-0.5 hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-300 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary-900;
   }
 
   .btn-outline-gold {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-primary-400 bg-white/0 px-7 py-3.5 font-sans text-sm font-semibold tracking-wide text-secondary-900 transition duration-300 hover:-translate-y-0.5 hover:bg-primary-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-accent-300/60 bg-transparent px-7 py-3.5 font-sans text-sm font-medium tracking-wide text-secondary-50 transition duration-300 hover:-translate-y-0.5 hover:border-accent-300 hover:bg-secondary-600/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-300 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary-900;
   }
 
   .card-surface {
-    @apply rounded-3xl border border-primary-300/60 bg-white shadow-soft;
+    @apply rounded-3xl border border-secondary-600 bg-secondary-800/90 shadow-soft;
   }
 }
 

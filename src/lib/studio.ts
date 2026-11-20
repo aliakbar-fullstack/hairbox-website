@@ -1,20 +1,42 @@
 export const STUDIO = {
-  name: 'DEZERT MAKEOVER STUDIO',
-  address: 'Edappal–Tirur Road, Near Indian Oil Petrol Pump, Pottethappadi, Tirur, Kerala 676101, India',
-  phoneDisplay: '+91 96459 60111',
-  phoneTel: '+919645960111',
-  whatsappNumber: '919645960111',
-  hoursDisplay: 'Every day, 9:30 AM – 10:00 PM',
-  opensMinutes: 9 * 60 + 30,
-  closesMinutes: 22 * 60,
-  mapsDirectionsUrl: 'https://www.google.co.in/maps/place/Dezert+Makeover+Studio+Tirur/',
-  mapsEmbedUrl: 'https://www.google.com/maps?q=Dezert+Makeover+Studio+Tirur&output=embed',
+  name: "HAIR BOX – THE MEN'S SALON",
+  tagline: "The Men's Salon",
+  address: '1st Floor, Moulana Space Building (Near Axis Bank), Ring Road, Tirur, Kerala 676101, India',
+  secondaryAddress: '1st Floor, Thoppil Building, Thazhe Kottakkal (Opp. Taza Mandhi Restaurant), Kottakkal, Kerala 676503, India',
+  phoneDisplay: '+91 95262 28000',
+  phoneTel: '+919526228000',
+  secondaryPhoneDisplay: '+91 80896 86288',
+  secondaryPhoneTel: '+918089686288',
+  whatsappNumber: '919526228000',
+  email: 'hairboxtirur@gmail.com',
+  hoursDisplay: 'Every day, 10:00 AM – 8:00 PM',
+  opensMinutes: 10 * 60,
+  closesMinutes: 20 * 60,
+  mapsDirectionsUrl: 'https://www.google.com/maps/search/?api=1&query=Hair+Box+The+Mens+Salon+Ring+Road+Tirur',
+  mapsEmbedUrl: 'https://www.google.com/maps?q=Hair+Box+The+Mens+Salon+Ring+Road+Tirur&output=embed',
   googleRating: '4.8',
-} as const;
-
-export function buildWhatsAppUrl(message: string): string {
-  return `https://wa.me/${STUDIO.whatsappNumber}?text=${encodeURIComponent(message)}`;
-}
+  branches: [
+    {
+      name: 'Tirur (Main Branch)',
+      address: '1st Floor, Moulana Space Building (Near Axis Bank), Ring Road, Tirur, Kerala 676101',
+      phoneDisplay: '+91 95262 28000',
+      phoneTel: '+919526228000',
+      whatsappNumber: '919526228000',
+    },
+    {
+      name: 'Kottakkal Branch',
+      address: '1st Floor, Thoppil Building, Thazhe Kottakkal (Opp. Taza Mandhi), Kottakkal, Kerala 676503',
+      phoneDisplay: '+91 80896 86288',
+      phoneTel: '+918089686288',
+      whatsappNumber: '918089686288',
+    },
+  ],
+};
 
 export const GENERAL_BOOKING_MESSAGE =
-  'Hello DEZERT Makeover Studio, I would like to book an appointment. Please let me know the available time slots.';
+  "Hello Hair Box – The Men's Salon, I would like to book an appointment. Please share available slots.";
+
+export function buildWhatsAppUrl(message: string, phone = STUDIO.whatsappNumber): string {
+  const digits = phone.replace(/\D/g, '');
+  return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
+}

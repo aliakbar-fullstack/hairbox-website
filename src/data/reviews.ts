@@ -9,23 +9,23 @@ export interface Review {
 export const REVIEWS: Review[] = [
   {
     id: 'r1',
-    name: 'Anjali N.',
-    service: 'Bridal Makeup',
+    name: 'Muhammed R.',
+    service: 'Advance Fade & Beard Sculpting',
     rating: 5,
-    quote: 'My bridal look lasted the entire day and through every ceremony. The team listened carefully and made me feel like the most beautiful version of myself.',
+    quote: 'Cleanest skin fade in Tirur. The barber took time to understand the exact taper and beard line I wanted, and the finish stayed sharp for weeks.',
   },
   {
     id: 'r2',
-    name: 'Revathi K.',
-    service: 'Hair Colouring',
+    name: 'Arjun K.',
+    service: 'Signature Wedding Groom Package',
     rating: 5,
-    quote: 'The balayage was exactly the soft, natural colour I had been looking for. The studio is calm, spotless and very professionally run.',
+    quote: 'Booked my wedding grooming session at Hair Box. From the keratin hair spa to the facial and wedding-day styling, everything was spotless and relaxed.',
   },
   {
     id: 'r3',
-    name: 'Fathima S.',
-    service: 'Signature Glow Facial',
+    name: 'Salman P.',
+    service: 'Protein Hair Spa & De-Tan',
     rating: 5,
-    quote: 'Friendly staff, unhurried service and a facial that left my skin glowing for days. Booking on WhatsApp was quick and easy.',
+    quote: 'Great ambiance, hygienic tools, and zero waiting when you book via WhatsApp. Easily my go-to men’s salon in Kottakkal and Tirur.',
   },
 ];
